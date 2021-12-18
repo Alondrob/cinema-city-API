@@ -1,4 +1,5 @@
 import React from 'react'
+import MovieFinder from './MovieFinder';
 
 const Movies = () =>
 {
@@ -39,7 +40,9 @@ const Movies = () =>
                                         ]}
                                     ];
             return (
-                <div> </div>
+                <div> 
+                  <MovieFinder movieData={movieData} name={"mamed"}/>
+                </div>
             )
 }
 

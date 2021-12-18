@@ -1,18 +1,26 @@
 import React, {useState} from 'react'
 
-const MovieFinder= () => {
+const MovieFinder= ({movieData}) => {
     console.log('hello')
     const [searchMovies, setSearchMovies] = useState([])
+    const [searchedWords, setSearchedWords] = useState(" ")
 
-    const handleFilter = (e) => {
-        const searchedMovie = e.target.value;
-        const newMovieArr = data.filter((value) => {
-            return value.title.includes(searchedMovie)
-        })
-        setSearchMovies(newMovieArr)
+    // const handleFilter = (e) => {
+    //     const searchedMovie = e.target.value;
+    //     const newMovieArr = filter((value) => {
+    //         return value.title.includes(searchedMovie)
+    //     })
+    //     setSearchMovies(newMovieArr)
+    // }
+    console.log(movieData)
+    const handleChange = (event) => {
+        setSearchedWords(event.target.value)
     }
     return (
-            <input type="text" placeholder='Search...' id="movie-search" onChange={handleFilter}/>
+        <div>
+            <input type="text" placeholder='Search...' onChange={handleChange} value={searchedWords} />
+        </div>
+            
     )
 }
 
