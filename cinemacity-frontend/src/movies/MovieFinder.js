@@ -60,19 +60,19 @@ const MovieFinder= () => {
                 placeholder='Search Movie...'
             />
             <div>
-                
-                    <button onClick={() => setActive('render')}>
-                        <img src={poster} alt='movie' ></img>
-                    </button>
+                    {filteredMovies.map((movie, i) => 
+                    <div>
+                            <button onClick={() => setActive('render')}>
+                                <img src={movie.Poster} alt='movie' ></img>
+                            </button>
+                        </div>)}
+                   
                     
                     
                     <div>
 
                         {active === 'render' && <MovieCard movieData={filteredMovies}/>}
                     </div>
-                       
-                    
-              
             </div>
         </div>
             
