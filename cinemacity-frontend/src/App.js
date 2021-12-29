@@ -8,6 +8,8 @@ import React from 'react';
 import MovieFinder from './movies/MovieFinder';
 import { movieData } from './utils/movies';
 import Test from './general/Test';
+import Data from './movies/Data';
+import Cast from './movies/Cast';
 
 
 
@@ -21,7 +23,8 @@ const App = () => {
         
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/moviefinder" element={<MovieFinder movieData={movieData} placeholder="Search Movie...." />} />
+          <Route path="/moviefinder" element={<Data />} />
+          <Route path="/movie/:id/cast" element={<Cast/>}/>
         </Routes>
       </Router>
 

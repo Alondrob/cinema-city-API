@@ -6,7 +6,8 @@ const MovieFinder= () => {
     console.log('hello')
     const [filteredMovies, setFilteredMovies] = useState([])
     const [searchValue, setSearchValue] = useState('');
-    const [active, setActive] = useState('');
+    const [active, setActive] = useState(false);
+    const[clickedMovie, setClickedMovie] = useState(null);
     
     // const handleChange = (event) => {
     //     const searchedWord = event.target.value
@@ -47,6 +48,11 @@ const MovieFinder= () => {
     const onImageClick = () => {
         console.log("Click!!!")
     }
+    const handleMovieClick = (movie) => {
+        setActive(true);
+        setClickedMovie(movie)
+        
+    }
    
 
     console.log(poster)
@@ -60,18 +66,18 @@ const MovieFinder= () => {
                 placeholder='Search Movie...'
             />
             <div>
-                    {filteredMovies.map((movie, i) => 
+                    {!active && filteredMovies.map((movie, i) => 
                     <div>
-                            <button onClick={() => setActive('render')}>
-                                <img src={movie.Poster} alt='movie' ></img>
-                            </button>
-                        </div>)}
+                         
+                                <img src={movie.Poster} alt='movie' onClick={() => handleMovieClick(movie)} ></img>
+                           
+                        </div>)} 
                    
-                    
+                
                     
                     <div>
 
-                        {active === 'render' && <MovieCard movieData={filteredMovies}/>}
+                        {active && <MovieCard movieData={clickedMovie}/>}
                     </div>
             </div>
         </div>
