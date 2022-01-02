@@ -18,7 +18,7 @@ const Cast = () => {
     return (
         <div>
             {casts.map(value => <li>
-                {value.actor.name}
+                actor: {value.actor.name}
             </li>)}
         </div>
     )
