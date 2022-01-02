@@ -6,6 +6,7 @@ const Menu = () => {
         <div>
             <Link to="/">Home Page</Link>&nbsp;
             <Link to="/moviefinder"> Find A Movie </Link>
+            <Link to="/sign-up"> Sign Up </Link>
             
         </div>
     )

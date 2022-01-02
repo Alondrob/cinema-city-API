@@ -1,15 +1,13 @@
 
 import './App.css';
 import styled from 'styled-components'
-import HomePage from './general/HomePage';
-import Menu from './general/Menu';
+import HomePage from './components/general/HomePage'
+import Menu from './components/general/Menu';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet, useParams, NavLink} from 'react-router-dom';
 import React from 'react';
-import MovieFinder from './movies/MovieFinder';
-import { movieData } from './utils/movies';
-import Test from './general/Test';
-import Data from './movies/Data';
-import Cast from './movies/Cast';
+import Data from './components/movies/Data'
+import Cast from './components/movies/Cast'
+import SignUp from './components/users/SignUp';
 
 
 
@@ -25,6 +23,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/moviefinder" element={<Data />} />
           <Route path="/movie/:id/cast" element={<Cast/>}/>
+          <Route path="/sign-up" element={<SignUp/>}/>
         </Routes>
       </Router>
 
