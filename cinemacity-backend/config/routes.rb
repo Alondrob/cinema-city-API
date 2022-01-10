@@ -4,4 +4,6 @@ Rails.application.routes.draw do
       resources :movie_actors
     end
     
+    resources :users
+    resources :sessions
 end

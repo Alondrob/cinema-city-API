@@ -1,0 +1,9 @@
+.actor-name {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.actor-role {
+    font-weight: lighter;
+    font-size: smaller;
+}
