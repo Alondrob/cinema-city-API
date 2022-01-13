@@ -21,7 +21,13 @@ const Cast = () => {
     
     return (
         <div>
-            {casts.length > 0 && <h1>{casts[0].movie.title}</h1>}
+            {casts.length > 0 && <img src={casts[0].movie.image}/>}
+            {casts.length > 0 && <p>Movie: {casts[0].movie.title}</p>}
+            {casts.length > 0 && <p>Director: {casts[0].movie.director}</p>}
+            {casts.length > 0 && <p>Plot: {casts[0].movie.plot}</p>}
+            {casts.length > 0 && <p>Movie Time: {casts[0].movie.movie_length}</p>}
+            {casts.length > 0 && <p>Imdb Rating: {casts[0].movie.rating}</p>}
+            
             
             {casts.map(value => 
             <div>
@@ -38,4 +44,4 @@ const Cast = () => {
     )
 }
 
-export default Cast
+export default Cast;

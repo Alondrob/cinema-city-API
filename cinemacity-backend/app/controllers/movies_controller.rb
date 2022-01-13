@@ -4,4 +4,8 @@ class MoviesController < ApplicationController
         movies = Movie.all
         render json: movies
     end
+
+    def create
+        favorite_Movie = 
+    end
 end

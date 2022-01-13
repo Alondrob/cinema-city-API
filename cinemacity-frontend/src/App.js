@@ -18,21 +18,24 @@ import { UserContext } from './components/users/UserProvider';
 const App = () => {
   const { checkLogin } = useContext(UserContext);
   checkLogin();
-  return (
-   <React.Fragment>
 
-      <Router>
-        <Menu />
-       
-        
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login/>}/>      
-          <Route path="/moviefinder" element={<Data />} />
-          <Route path="/movie/:id/cast" element={<Cast/>}/>
-          <Route path="/sign-up" element={<SignUp/>}/>
-        </Routes>
-      </Router>
+  return (
+   <React.Fragment >
+    <div className='app-color'>
+            <Router>
+              <Menu />
+
+
+              <Routes >
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/moviefinder" element={<Data />} />
+                <Route path="/movie/:id/cast" element={<Cast />} />
+                <Route path="/sign-up" element={<SignUp />} />
+              </Routes>
+            </Router>
+    </div>
+   
 
      </React.Fragment>
   
