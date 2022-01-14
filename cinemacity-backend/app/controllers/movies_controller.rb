@@ -5,7 +5,5 @@ class MoviesController < ApplicationController
         render json: movies
     end
 
-    def create
-        favorite_Movie = 
-    end
+   
 end

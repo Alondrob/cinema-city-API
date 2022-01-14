@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_02_162706) do
+ActiveRecord::Schema.define(version: 2022_01_13_222414) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name"
     t.string "imdb_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorite_movies", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_favorite_movies_on_movie_id"
+    t.index ["user_id"], name: "index_favorite_movies_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
