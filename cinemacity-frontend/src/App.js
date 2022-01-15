@@ -10,6 +10,7 @@ import Cast from './components/movies/Cast'
 import SignUp from './components/users/SignUp';
 import Login from './components/users/Login';
 import { UserContext } from './components/users/UserProvider';
+import FavoriteMovie from './components/movies/FavoriteMovie';
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
                 <Route path="/moviefinder" element={<Data />} />
                 <Route path="/movie/:id/cast" element={<Cast />} />
                 <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/favorite-movies" element={<FavoriteMovie />} />
               </Routes>
             </Router>
     </div>

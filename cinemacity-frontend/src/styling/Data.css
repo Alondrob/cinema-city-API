@@ -18,3 +18,8 @@
 .scroll-bar {
     overflow-x: scroll;
 }
+
+.faded-heart {
+    size: 10px;
+    color: darkslategrey;
+}

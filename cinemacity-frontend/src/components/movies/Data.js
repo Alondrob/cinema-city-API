@@ -6,11 +6,14 @@ import SearchBar from '../general/SearchBar';
 import '../../styling/Data.css'
 import {Srollbars} from 'react-custom-scrollbars'
 import {FcLike, FcLikePlaceholder} from 'react-icons/fc'
+import FavoriteMovie from './FavoriteMovie';
+import MovieCard from './MovieCard';
 
 
 const Data = () => {
     const [movies, setMovies] = useState([]);
     const [input, setInput] =useState('');
+   
 
     const movieRequest = async () => {
         const url = `http://localhost:3000/movies`
@@ -37,9 +40,9 @@ const Data = () => {
     const filteredMovies = movies.filter(word => word.title.toLowerCase().includes(input.toLocaleLowerCase()))
        console.log(filteredMovies)
         
-    
 
-console.log(movies)
+
+
     return (
         <>
       
@@ -48,11 +51,7 @@ console.log(movies)
                 {input != '' && <Container className='container' >
                     <Row>{filteredMovies.map((value) =>
                         <Col lg={3}>
-                            <Card>
-
-                                <a href={`/movie/${value.id}/cast`} ><Card.Img src={value.image} /> </a>
-                                <FcLikePlaceholder/> <FcLike />
-                            </Card>
+                            <MovieCard movieData={value}/>
                         </Col>)}
 
                     <div className='scroll-bar'>
@@ -62,7 +61,7 @@ console.log(movies)
                     </Row >
                         
                 </Container>}
-            
+                      
             </>
 
 
