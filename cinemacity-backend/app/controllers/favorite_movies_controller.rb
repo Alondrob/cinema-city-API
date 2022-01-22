@@ -20,7 +20,7 @@ class FavoriteMoviesController < ApplicationController
         private 
 
         def favorite_movie_params
-            params.require(:favorite_movie).permit(:movie_id)
+            params.require(:favorite_movie).permit(:movie_id, )
         end
 
 end

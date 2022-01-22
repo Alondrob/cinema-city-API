@@ -7,3 +7,9 @@
     font-weight: lighter;
     font-size: smaller;
 }
+
+.trying {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start
+}

@@ -16,6 +16,7 @@ import FavoriteMovie from './components/movies/FavoriteMovie';
 
 
 
+
 const App = () => {
   const { checkLogin } = useContext(UserContext);
   checkLogin();
@@ -25,6 +26,7 @@ const App = () => {
     <div className='app-color'>
             <Router>
               <Menu />
+         
 
 
               <Routes >

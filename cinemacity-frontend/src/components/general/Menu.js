@@ -8,10 +8,10 @@ const Menu = () => {
     return (
         <div>
             <Link to="/">Home Page</Link>&nbsp;
-            <Link to="/moviefinder"> Find A Movie </Link>
-            {!user.auth && <Link to="/sign-up"> Sign Up </Link>}
-            {!user.auth && <Link to="/Login"> Login </Link>}
-            <Link to="/favorite-movies"> Favorite Movies </Link>
+            <Link to="/moviefinder"> Find A Movie </Link>&nbsp;
+            {!user.auth && <Link to="/sign-up"> Sign Up </Link>}&nbsp;
+            {!user.auth && <Link to="/Login"> Login </Link>}&nbsp;
+            <Link to="/favorite-movies"> Favorite Movies </Link>&nbsp;
 
             <p>
                 {user.auth ? ` Hello ${user.email}` : "you're logged out"}

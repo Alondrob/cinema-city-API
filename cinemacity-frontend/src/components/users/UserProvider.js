@@ -26,9 +26,13 @@ export const  UserProvider = ({children}) => {
          
         }
 
+        const getToken = () => {
+            localStorage.getItem("token")
+        }
+
 
     return (
-       <UserContext.Provider value={{user, login, logout, checkLogin}}>
+       <UserContext.Provider value={{user, login, logout, checkLogin, getToken}}>
 
             {children}
 

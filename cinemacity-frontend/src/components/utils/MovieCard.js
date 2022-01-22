@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../styling/Data.css'
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { UserContext } from '../users/UserProvider';
+import Rating from './Rating';
 
 
 const MovieCard = ({movieData}) => {

@@ -10,84 +10,94 @@
 require 'uri'
 require 'net/http'
 require 'openssl'
-MovieActor.destroy_all
-Actor.destroy_all
-Movie.destroy_all
+puts  "apple"
+MovieActor.delete_all
+Actor.delete_all
+Movie.delete_all
+puts "cherry"
 
-url = URI("https://data-imdb1.p.rapidapi.com/movie/byYear/2020/?page_size=100")
+(1970..2022).to_a.each do |year|
+    page_number = 1
+    loop do
+        puts "year: #{year}, page_number: #{page_number}"
+        url = URI("https://data-imdb1.p.rapidapi.com/movie/byYear/#{year}/?page_size=100#{'&page=' + page_number if page_number > 1}")
+        page_number += 1
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        request = Net::HTTP::Get.new(url)
+        request["x-rapidapi-host"] = 'data-imdb1.p.rapidapi.com'
+        request["x-rapidapi-key"] = '4f49e44fe5mshb356fb96b2bc15ap109f78jsne88cc1e9d543'
 
-request = Net::HTTP::Get.new(url)
-request["x-rapidapi-host"] = 'data-imdb1.p.rapidapi.com'
-request["x-rapidapi-key"] = '4f49e44fe5mshb356fb96b2bc15ap109f78jsne88cc1e9d543'
+        response = http.request(request)
 
-response = http.request(request)
-
-json = JSON.parse(response.read_body)
+        json = JSON.parse(response.read_body)
 
 
+        json["results"].each do |movieData|
+            movie = Movie.new(title: movieData["title"])
+            
+            #why 
+            
+            url = URI("https://data-imdb1.p.rapidapi.com/movie/id/#{movieData['imdb_id']}/")
 
-json["results"].each do |movieData|
-    movie = Movie.new(title: movieData["title"])
-    
-    #why 
-    
-    url = URI("https://data-imdb1.p.rapidapi.com/movie/id/#{movieData['imdb_id']}/")
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            request = Net::HTTP::Get.new(url)
+            request["x-rapidapi-host"] = 'data-imdb1.p.rapidapi.com'
+            request["x-rapidapi-key"] = '4f49e44fe5mshb356fb96b2bc15ap109f78jsne88cc1e9d543'
 
-    request = Net::HTTP::Get.new(url)
-    request["x-rapidapi-host"] = 'data-imdb1.p.rapidapi.com'
-    request["x-rapidapi-key"] = '4f49e44fe5mshb356fb96b2bc15ap109f78jsne88cc1e9d543'
+            response = http.request(request)
+            
+            movie_json = JSON.parse(response.read_body)
+        
+            movie.image = movie_json["results"]["image_url"]
+            movie.plot = movie_json["results"]["plot"]
+            movie.year = movie_json["results"]["year"]
+            movie.rating = movie_json["results"]["rating"]
+            movie.movie_length = movie_json["results"]["movie_length"]
 
-    response = http.request(request)
-    
-    movie_json = JSON.parse(response.read_body)
-   
-    movie.image = movie_json["results"]["image_url"]
-    movie.plot = movie_json["results"]["plot"]
-    movie.year = movie_json["results"]["year"]
-    movie.rating = movie_json["results"]["rating"]
-    movie.movie_length = movie_json["results"]["movie_length"]
+            url = URI("https://data-imdb1.p.rapidapi.com/movie/id/#{movieData['imdb_id']}/cast/")
 
-    url = URI("https://data-imdb1.p.rapidapi.com/movie/id/#{movieData['imdb_id']}/cast/")
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            request = Net::HTTP::Get.new(url)
+            request["x-rapidapi-host"] = 'data-imdb1.p.rapidapi.com'
+            request["x-rapidapi-key"] = '4f49e44fe5mshb356fb96b2bc15ap109f78jsne88cc1e9d543'
 
-    request = Net::HTTP::Get.new(url)
-    request["x-rapidapi-host"] = 'data-imdb1.p.rapidapi.com'
-    request["x-rapidapi-key"] = '4f49e44fe5mshb356fb96b2bc15ap109f78jsne88cc1e9d543'
+            response = http.request(request)
+            json_actors = JSON.parse(response.read_body)
+            
+            movie.director = json_actors["results"]["roles"].find { |role_json| role_json["role"] == "Director" }["actor"]["name"]
 
-    response = http.request(request)
-    json_actors = JSON.parse(response.read_body)
-    
-     movie.director = json_actors["results"]["roles"].find { |role_json| role_json["role"] == "Director" }["actor"]["name"]
-
-     filtered_writers =  json_actors["results"]["roles"].map {
-         |var|
-         if(var["role"] == "Writer")
-            var["actor"]["name"]
-         end
-     }
-     movie.writers = filtered_writers.uniq.compact.join(', ')
-    
-     movie.save
-
-     filtered_actors = json_actors["results"]["roles"].select {
-         |val| ["Writer", "Director"].exclude?(val["role"])
-     }
-     filtered_actors.each  do |val| 
-       actor = Actor.find_or_create_by(name: val["actor"]["name"],imdb_id: val["actor"]["imdb_id"])
-       movie_actor = MovieActor.create(role: val["role"], actor_id: actor.id, movie_id: movie.id )
-     end
-      
-     
+            filtered_writers =  json_actors["results"]["roles"].map {
+                |var|
+                if(var["role"] == "Writer")
+                    var["actor"]["name"]
+                end
+            }
+            movie.writers = filtered_writers.uniq.compact.join(', ')
+            
+            movie.save
+            puts "movie saved with id #{movie.id} and name #{movie.title}"
+            filtered_actors = json_actors["results"]["roles"].select {
+                |val| ["Writer", "Director"].exclude?(val["role"])
+            }
+            filtered_actors.each  do |val| 
+            actor = Actor.find_or_create_by(name: val["actor"]["name"],imdb_id: val["actor"]["imdb_id"])
+            movie_actor = MovieActor.create(role: val["role"], actor_id: actor.id, movie_id: movie.id )
+            end
+            
+            
+        end
+        unless json["next"]
+            break
+        end
+    end
 end
 

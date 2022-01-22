@@ -7,7 +7,7 @@ import '../../styling/Data.css'
 import {Srollbars} from 'react-custom-scrollbars'
 import {FcLike, FcLikePlaceholder} from 'react-icons/fc'
 import FavoriteMovie from './FavoriteMovie';
-import MovieCard from './MovieCard';
+import MovieCard from '../utils/MovieCard';
 
 
 const Data = () => {

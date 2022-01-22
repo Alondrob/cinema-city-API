@@ -1,6 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react'
-import MovieCard from './MovieCard';
+import MovieCard from '../utils/MovieCard';
 import { UserContext } from '../users/UserProvider';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../styling/Data.css'
+import { Card, Row, Container, Col } from 'react-bootstrap';
+import Rating from '../utils/Rating';
+
 const  FavoriteMovie = () => {
     const { user } = useContext(UserContext);
     const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -16,12 +21,21 @@ const  FavoriteMovie = () => {
 
     useEffect(() => {
         getFavorites();
-    }, [])
+    }, [favoriteMovies])
 
 
     return (
         <div>
-           {favoriteMovies.map(movieData => <MovieCard movieData={movieData}/>)}
+            <Row>
+                {favoriteMovies.map(movieData => 
+                <Col lg={3}>
+                        <MovieCard movieData={movieData} >
+                           
+                        </MovieCard>
+                    </Col>)}
+               
+            </Row>
+           
         </div>
     )
 }

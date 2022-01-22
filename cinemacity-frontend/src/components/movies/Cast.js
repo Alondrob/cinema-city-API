@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import '../../styling/Cast.css'
+import Rating from '../utils/Rating'
+import { Card, Row, Container, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Cast = () => {
     const [casts, setCasts] = useState([])
@@ -17,11 +20,22 @@ const Cast = () => {
 
     }, []);
 
-   
-    
+    let movieId = casts.map((value) => {
+        return value.movie.id
+    })
+
+   console.log(casts[0])
+ 
     return (
         <div>
-            {casts.length > 0 && <img src={casts[0].movie.image}/>}
+            <div className='trying'>
+             
+                {casts.length > 0 && <img src={casts[0].movie.image} />}&nbsp;&nbsp;&nbsp;
+                    <Rating movieId={id} />
+               
+                
+            </div>
+            
             {casts.length > 0 && <p>Movie: {casts[0].movie.title}</p>}
             {casts.length > 0 && <p>Director: {casts[0].movie.director}</p>}
             {casts.length > 0 && <p>Plot: {casts[0].movie.plot}</p>}
