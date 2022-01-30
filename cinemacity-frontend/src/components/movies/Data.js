@@ -41,7 +41,7 @@ const Data = () => {
        console.log(filteredMovies)
         
 
-
+console.log(movies)
 
     return (
         <>
