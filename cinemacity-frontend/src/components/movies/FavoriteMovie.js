@@ -29,8 +29,8 @@ const  FavoriteMovie = () => {
             <Row>
                 {favoriteMovies.map(movieData => 
                 <Col lg={3}>
-                        <MovieCard movieData={movieData} >
                            
+                        <MovieCard movieData={movieData} >
                         </MovieCard>
                     </Col>)}
                
