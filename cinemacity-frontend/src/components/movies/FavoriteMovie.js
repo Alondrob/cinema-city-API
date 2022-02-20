@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react'
 import MovieCard from '../utils/MovieCard';
 import { UserContext } from '../users/UserProvider';
-import 'bootstrap/dist/css/bootstrap.min.css'
+ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../styling/Data.css'
 import { Card, Row, Container, Col } from 'react-bootstrap';
 import Rating from '../utils/Rating';
